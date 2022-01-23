@@ -18,21 +18,19 @@
 					v-model="query"
 					@keypress="fetchWeather"
 				/>
-				<!-- {{ query }} -->
 			</div>
 
 			<div class="weather-wrapper" v-if="typeof weather.main != 'undefined'">
 				<div class="location-info">
 					<div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
 					<div class="date">
-						{{ dateBuilder() }},<br />
-						{{ sunRise() }}
+						{{ dateBuilder() }}
 					</div>
 				</div>
 
 				<div class="weather-info">
 					<div class="temp">{{ Math.round(weather.main.temp) }}°C</div>
-					<div class="type">{{ weather.weather[0].main }}</div>
+					<div class="type">{{ weather.weather.description }}</div>
 				</div>
 			</div>
 		</main>
@@ -130,102 +128,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,500,700,900');
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
-	font-family: 'montserrat', sans-serif;
-}
-
-#app {
-	background-image: url('./assets/cold.png');
-	background-position: bottom;
-	background-size: cover;
-	transition: 0.4;
-}
-
-#app.warm {
-	background-image: url('./assets/warm.png');
-}
-
-#app.fair {
-	background-image: url('./assets/fair.png');
-}
-
-#app.night {
-	background-image: url('./assets/night.png');
-}
-
-main {
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0.75));
-	min-height: 100vh;
-	padding: 25px;
-}
-
-.search-box .search-bar {
-	appearance: none;
-	background-color: rgba(255, 255, 255, 0.5);
-	border-radius: 0 16px 0px 16px;
-	border: none;
-	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-	color: #333;
-	display: block;
-	font-size: 20px;
-	margin-bottom: 30px;
-	outline: none;
-	padding: 15px;
-	transition: all 0.4s;
-	width: 100%;
-}
-
-.search-box .search-bar:focus {
-	background-color: rgba(255, 255, 255, 0.75);
-	border-radius: 16px 0px 16px 0px;
-	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-}
-
-.location-info .location {
-	color: white;
-	font-size: 32px;
-	font-weight: 500;
-	text-align: center;
-	text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
-}
-.location-info .date {
-	color: white;
-	font-size: 20px;
-	font-style: italic;
-	font-weight: 300;
-	text-align: center;
-}
-
-.weather-info {
-	text-align: center;
-}
-
-.weather-info .temp {
-	display: inline-block;
-	padding: 10px 25px;
-	color: white;
-	font-size: 100px;
-	font-weight: 900;
-	text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-	background-color: rgba(255, 255, 255, 0.25);
-	border-radius: 16px;
-	margin: 30px 0px;
-	box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-}
-
-.weather-info .type {
-	color: white;
-	font-size: 48px;
-	font-size: 700;
-	font-style: italic;
-	text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
-}
+@import './assets/scss/app.scss';
 </style>
